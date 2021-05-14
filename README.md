@@ -1,6 +1,6 @@
 #webcontrollers
 
-simple framework for micro frontends
+super simple framework for micro frontends
 
 The init.js iffi checks de html for elements with atrribute 'js-class' 
 and add a corrsponding controller methods and events to the elements.
