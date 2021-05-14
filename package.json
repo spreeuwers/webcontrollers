@@ -1,0 +1,24 @@
+{
+  "name": "webcontrollers",
+  "version": "0.0.1",
+  "description": "small simple framework for microfrontends",
+  "main": "init.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spreeuwers/webcontrollers.git"
+  },
+  "keywords": [
+    "mircofrontend",
+    "webcontrollers",
+    "no compiler, no webpack"
+  ],
+  "author": "Eddy Spreeuwers",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/spreeuwers/webcontrollers/issues"
+  },
+  "homepage": "https://github.com/spreeuwers/webcontrollers#readme"
+}
