@@ -4,7 +4,7 @@
   "description": "small simple framework for microfrontends",
   "main": "init.js",
   "scripts": {
-    "test": "test"
+    "pub": "npm publish"
   },
   "repository": {
     "type": "git",
