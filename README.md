@@ -1,9 +1,11 @@
 #webcontrollers
 
 super simple framework for micro frontends
+Add the init.js to you html page in the header.
 
-The init.js iffi checks de html for elements with atrribute 'js-class' 
+After de page is loaded, the init.js iffi checks de html for elements with atrribute 'js-class' 
 and adds a corresponding controller methods and events to the elements.
+
 
 you can specify a getHTML function as a template
 and define events in the controller class.
