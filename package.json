@@ -1,6 +1,6 @@
 {
   "name": "webcontrollers",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "small simple framework for microfrontends",
   "main": "init.js",
   "scripts": {

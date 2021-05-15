@@ -22,20 +22,20 @@ Example:
 --------------------------------
 mycontroller.js:\
 
-export class MyController {
-   onclick(){
-     alert('hi');
-   }
-}
+    export class MyController {
+       onclick(){
+          alert('hi');
+       }
+    }
 
 index.html:
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <script src="init.js"></script>
-</head>
-<body>
-  <button web-controller="MyController.js"></button>
-</body>
-</html>
+    <!DOCTYPE html>
+    <html lang="en">
+     <head>
+       <script src="init.js"></script>
+     </head>
+     <body>
+       <button web-controller="MyController.js"></button>
+     </body>
+    </html>
