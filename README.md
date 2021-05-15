@@ -16,6 +16,9 @@ first button element in the element having the controller class.
 A method named onclickButton_mybtn will be bound to an button with 
 id mybtn.
 
+All the elements having the web-controller attribute are added to a global 
+object variable named app. They can be referenced as property of app.
+
 
 Example:
 --------------------------------

@@ -167,7 +167,7 @@
     }
 
     function doAutoWire() {
-        //wait untile autowire is loaded
+        //wait until autowire is loaded
         if (autowire) {
             window.app = autowire();
             console.log('autowire loaded app' ,window.app);
