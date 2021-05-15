@@ -3,7 +3,7 @@
 A super simple framework for micro frontends.
 Add the init.js to you html page in the header.
 
-After de page is loaded, the init.js iffi checks de html for elements 
+After de page is loaded, the init.js script checks de html for elements 
 with atrribute 'web-controller' and loads the specified controller class. 
 It adds the controller methods and events to the corresponding elements.
 
