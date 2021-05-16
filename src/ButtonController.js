@@ -3,12 +3,17 @@
  */
 export class ButtonController {
 
-    button1(){
-        return this.getElementsByTagName('button')[0];
-    }
 
     onclickButton1(){
-      this.button1().innerHTML = 'clicked!';
+      window.location.hash="page1";
+    }
+
+    onclickButton2(){
+      window.location.hash="page2";
+    }
+
+    onclickButton3(){
+        window.location.hash="form";
     }
 
 }

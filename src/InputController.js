@@ -41,6 +41,6 @@ export class InputController {
 
 
     onresize(){
-
+        this.style.fontSize = this.offsetWidth/4 + '%';
     }
 }

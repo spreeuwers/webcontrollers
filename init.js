@@ -1,8 +1,24 @@
+
+
 (function () {
     const DATA_URL_PREFIX = 'data:text/javascript;charset=utf-8,'
     const FUNCTION = 'function';
     const CONSTRUCTOR = 'constructor';
     const DEFAULT_CONTROLLER_ATTRIBUTE = "web-controller";
+
+    function setHtml(ctrl, elm, doNext) {
+
+        const r = ctrl.getHtml.call(elm);
+        if (r.then) {
+            r.then(r => {
+                elm.innerHTML = r;
+                if (typeof doNext  === 'function') doNext();
+            });
+        } else {
+            elm.innerHTML = r;
+            if (typeof doNext === 'function') doNext();
+        }
+    }
 
     function autowire(rootElement = document, scanAttribute = DEFAULT_CONTROLLER_ATTRIBUTE) {
 
@@ -28,21 +44,10 @@
 
         }
 
-        function getPropNames(controller) {
-            let result = [];
-            let proto = controller.prototype;
-            while (Object.getPrototypeOf(proto)) {
-                let keys = Object.getOwnPropertyNames(proto);
-                result = result.concat(keys);
-                proto = Object.getPrototypeOf(proto);
 
-            }
-            return result;
 
-        }
-
-        function bindMethodsAndEvents (controller, ctrl, elm, elmType) {
-            //let keys = Object.getOwnPropertyNames(controller.prototype);
+        function bindMethodsAndEvents (controller, ctrl, elm) {
+            let elmType = Object.getPrototypeOf(elm).constructor.name;
             let keys = getPropNames(controller);
 
 
@@ -51,6 +56,11 @@
             for (let method of methods) {
                 let srcElements = [elm];
                 let event = method.substring(2);
+
+                if ('onresize' === method)  {
+                    new ResizeObserver(ctrl[method].bind(elm)).observe(elm);
+                    continue;
+                }
 
                 let methodParts = /on([a-z]+)([A-Z][a-z]+)(_\w+|[0-9]*)/.exec(method);
                 if (methodParts) {
@@ -114,12 +124,18 @@
                 }
                 //insert html
                 if (ctrl.getHtml) {
-                    elm.innerHTML = ctrl.getHtml.call(elm);
-                    Object.assign(result, autowire(elm));
+                    let doNext = () =>{
+                        Object.assign(result, autowire(elm));
+                        bindMethodsAndEvents(controller, ctrl, elm);
+                    };
+                    setHtml(ctrl, elm, doNext);
+                } else {
+
+                    bindMethodsAndEvents(controller, ctrl, elm);
                 }
 
-                let elmType = Object.getPrototypeOf(elm).constructor.name;
-                bindMethodsAndEvents(controller, ctrl, elm, elmType);
+
+
 
                 elm.refresh = () => {
                     "use strict";
@@ -138,9 +154,7 @@
             });
         }
 
-        function arrayify(elms) {
-            return [].slice.call(elms, 0);
-        }
+
 
         //collect all classes and elements having the corresponding attribute
         let jsClasses = {}; //init empty map
@@ -164,6 +178,23 @@
         //console.log("returning:\n", JSON.stringify(result,null,3));
         return result;
 
+    }
+
+    function getPropNames(controller) {
+        let result = [];
+        let proto = controller.prototype;
+        while (Object.getPrototypeOf(proto)) {
+            let keys = Object.getOwnPropertyNames(proto);
+            result = result.concat(keys);
+            proto = Object.getPrototypeOf(proto);
+
+        }
+        return result;
+
+    }
+
+    function arrayify(elms) {
+        return [].slice.call(elms, 0);
     }
 
     function doAutoWire() {
