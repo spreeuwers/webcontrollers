@@ -69,3 +69,12 @@ In a controller event this.refresh() can be invoked to update the elements
 inner HTML. When this.refresh is processed the getHtml() method will 
 be invoked to render the updated content. 
 
+The getHtml method may also return a promise, for example:  
+
+
+    async getHtml(){
+       const response = await fetch(`${this.page.replace('#','')}.html`);
+       return response.text();
+    }
+
+This way external template files can be (re)used.
