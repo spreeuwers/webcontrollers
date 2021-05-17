@@ -73,7 +73,7 @@ The getHtml method may also return a promise, for example:
 
 
     async getHtml(){
-       const response = await fetch(`${this.page.replace('#','')}.html`);
+       const response = await fetch(`${window.location.hash.replace('#','')}.html`);
        return response.text();
     }
 

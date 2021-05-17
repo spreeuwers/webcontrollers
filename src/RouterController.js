@@ -6,7 +6,7 @@ export class RouterController {
 
    async getHtml(){
         //console.log(this.page, this.id, window.location.href);
-        const response = await fetch(`${this.page.replace('#','')}.html`);
+        const response = await fetch(`${window.location.hash.replace('#','')}.html`);
         return response.text();
    }
 
@@ -18,11 +18,8 @@ export class RouterController {
        this.style.overflow="scroll";
        this.style.height="5em";
 
-       this.page=window.location.hash || 'page1';
 
        window.addEventListener('hashchange', (h) => {
-           this.page = window.location.hash.replace('#','');
-           //console.log(this.page,this.id);
            this.refresh();
        });
    }
