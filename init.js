@@ -26,12 +26,19 @@
         let module = null;
 
         async function getClassForName(className) {
-            let importUrl = './' + className;
-            if (className.endsWith('.js')) {
-
-                module = await import(importUrl);
-                className = className.split('/').pop().replace('.js', '');
+            const protocol = this.location.protocol;
+            const host = this.location.hostname;
+            const port = this.location.port;
+            const path = this.location.pathname.replace(/\/\w+\.html$/,'');
+            if (!className.endsWith('.js')) {
+                className= className + '.js';
             }
+            let importUrl = `${protocol}//${host}:${port}${path}/${className}`;
+
+
+            module = await import(importUrl);
+            className = className.split('/').pop().replace('.js', '');
+
 
             //if it is a module return de class in de module
             if (module) {
