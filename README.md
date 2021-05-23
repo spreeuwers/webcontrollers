@@ -5,6 +5,7 @@ Add the init.js to you html page in the header.
 
 Load from:"https://unpkg.com/webcontrollers"
 
+
 After the page is loaded, the init.js script checks the html for elements 
 with atrribute 'web-controller' and loads the specified controller class. 
 It adds the controller methods and events to the corresponding elements.
@@ -52,7 +53,7 @@ index.html:
     <!DOCTYPE html>
     <html lang="en">
      <head>
-       <script src="init.js"></script>
+       <script src="https://unpkg.com/webcontrollers"></script>
      </head>
      <body>
        

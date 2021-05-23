@@ -8,8 +8,10 @@ export class InputController {
         return `
             <H2>webcontroller ${this.id}</H2>
             <p>${this.firstname}</p>
-            <input id="input${this.id}" type="text" name='text' placeholder="type som text" name="firstname" value="${this.firstname}">
-            <br><br>
+            <form name="form1">
+              <input id="input${this.id}" type="text" name='textinput' placeholder="type som text" name="firstname" value="${this.firstname}">
+              <br><br>
+            </form>
         `;
 
    }

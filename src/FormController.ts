@@ -10,7 +10,7 @@ export class FormController {
     public lastname: string;
 
     init(){
-       this.getElementsByTagName('label');
+       //this.getElementsByTagName('label');
        this.firstname.value = "John";
        this.lastname.value = "Doe";
     }

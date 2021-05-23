@@ -4,11 +4,14 @@
 export class RouterController {
 
 
-   async getHtml(){
+    async getHtml() {
         //console.log(this.page, this.id, window.location.href);
-        const response = await fetch(`${window.location.hash.replace('#','')}.html`);
-        return response.text();
-   }
+        if (window.location.hash) {
+            const response = await fetch(`${window.location.hash.replace('#', '')}.html`);
+            return response.text();
+        }
+        return '';
+    }
 
 
    init(){

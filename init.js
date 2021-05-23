@@ -5,6 +5,7 @@
     const FUNCTION = 'function';
     const CONSTRUCTOR = 'constructor';
     const DEFAULT_CONTROLLER_ATTRIBUTE = "web-controller";
+    const modules = {};
 
     function setHtml(ctrl, elm, doNext) {
 
@@ -20,23 +21,34 @@
         }
     }
 
+    function urlForClassName(className) {
+        let importUrl = '';
+        if (!className.endsWith('.js')) {
+            className = className + '.js';
+        }
+        if (/https?:\/\//.test(className)) {
+            importUrl = className;
+        } else {
+            const protocol = location.protocol;
+            const host = location.hostname;
+            const port = location.port;
+            const path = location.pathname.split('/').slice(1).shift();
+            importUrl = `${protocol}//${host}:${port}/${path}/${className}`;
+        }
+        return importUrl;
+    }
+
     function autowire(rootElement = document, scanAttribute = DEFAULT_CONTROLLER_ATTRIBUTE) {
 
         let result = {};
         let module = null;
 
         async function getClassForName(className) {
-            const protocol = this.location.protocol;
-            const host = this.location.hostname;
-            const port = this.location.port;
-            const path = this.location.pathname.replace(/\/\w+\.html$/,'');
-            if (!className.endsWith('.js')) {
-                className= className + '.js';
-            }
-            let importUrl = `${protocol}//${host}:${port}${path}/${className}`;
 
+            const importUrl = urlForClassName(className);
 
-            module = await import(importUrl);
+            module = modules[importUrl] || (modules[importUrl] = await import(importUrl));
+
             className = className.split('/').pop().replace('.js', '');
 
 
@@ -47,6 +59,8 @@
                     console.error('class', className, ' not found in module', importUrl, '!');
                 }
                 return module[className];
+            } else {
+                console.error('Could not load module: ', importUrl, '!');
             }
 
         }
